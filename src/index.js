@@ -56,14 +56,9 @@ const funcio = async () => {
       const data_converter = JSON.stringify(data);
       const back = JSON.stringify(window.location.href);
       let backIndex = "index.html#ventana"
-      if (back.includes(backIndex)) {
-        console.log("Verdadero")
         contenedor.classList.toggle("hidden");
         ventana.classList.toggle("h-full");
-      } else {
-        console.log("falso")
-        contenedor.classList.toggle("visible");
-      }
+
       console.log();
   
      
