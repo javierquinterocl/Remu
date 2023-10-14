@@ -52,10 +52,23 @@ const funcio = async () => {
       const num_data = e.target.alt;
 
       const data = await response()
-      const data_converter = JSON.stringify(data)
-      console.log(data_converter);
-      contenedor.classList.toggle("hidden");
-      ventana.classList.toggle("h-full");
+      console.log(data)
+      const data_converter = JSON.stringify(data);
+      const back = JSON.stringify(window.location.href);
+      let backIndex = "index.html#ventana"
+      if (back.includes(backIndex)) {
+        console.log("Verdadero")
+        contenedor.classList.toggle("hidden");
+        ventana.classList.toggle("h-full");
+      } else {
+        console.log("falso")
+        contenedor.classList.toggle("visible");
+      }
+      console.log();
+  
+     
+      
+     
       // const id = result.data.images[0].artist.artist_id;
        
       let validate_data;
@@ -74,6 +87,10 @@ const funcio = async () => {
         source = data.data.images[num_data].artist.source;
       }
       const url = click_id;
+      let imagen = "";
+      let num = 0;
+      let imageurl = "";
+
       const mostrar = ` 
 
       <div class="flex space-y-5 max-w-5xl mt-12 justify-center flex-wrap bg-slate-600 rounded-xl  h-[200px] sm:h-[300px] mx-auto w-[400px]">
@@ -91,6 +108,7 @@ const funcio = async () => {
         </div>
         
       </div>
+     
     </div>
    
         <div class="w-[400px] sm:w-[600px] h-full relative rounded-lg flex-col my-12 overflow-hidden group transition border-2 border-red-500 shadow-md mx-auto">
@@ -107,11 +125,40 @@ const funcio = async () => {
                </div>
               
            </div>
-           
+  
+
+
 
     `;
+      data.data.images.forEach((element) => {
+        if (num <= 5) {
+          imageurl = element.url;
+          imagen =
+            imagen +
+            `
+            
+            <div class="w-[300px] h-full relative rounded-lg flex-col my-12 overflow-hidden group transition border-2 border-red-500 shadow-md mx-3">
+               <div class="relative bg-auto ">
+                   <div class="w-full h-full bg-slate-800 group-hover:blur-[2px] ">
+                       <img id="${element.url}" src="${element.url}" alt="${num}">
+                       
+                   </div>
+                   <div class="absolute top-6 -right-11 group-hover:right-0 flex flex-col opacity-0 group-hover:opacity-100 transition-all duration-300">
+                           <button class="bg-red-600 p-4 rounded-md text-white"><svg class="i i-heart" viewBox="0 0 24 24"><path d="m12 21-8.8-8.3A5.6 5.6 0 1 1 12 6a5.6 5.6 0 1 1 8.9 6.6z"></path></svg></button>
+                           <a download= "${element.image_id}" href="${imageurl}" class="bg-fuchsia-50 p-4 rounded-md"><svg class="i i-upload" viewBox="0 0 24 24"><path d="m7 8 5-5 5 5m-5 7V3m10 12v4a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-4"></path></svg></a>
+                          
+                   </div>
+               </div>
+              
+           </div>
+           `;
+        }
+        num++;
+      });
       console.log(mostrar);
       document.getElementById("mostrar").innerHTML += mostrar;
+      document.getElementById("vermas").innerHTML += imagen;
+
     });
   } catch (error) {
     console.log(error);
