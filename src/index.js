@@ -45,50 +45,58 @@ const funcio = async () => {
     console.log(response())
     const contenedor = document.getElementById("contenedor");
 
+    let ventana = document.getElementById("ventana");
+    ventana.addEventListener("click", (e) => {
+      if (e.target.closest("button")) {
+        ventana.classList.toggle("hidden");
+        contenedor.classList.remove("hidden");
+      } else {
+         
+      }
+    });
+    
+    
     contenedor.addEventListener("click", async (e) => {
-      const ventana = document.getElementById("ventana");
+      
       let contenedor = document.getElementById("contenedor");
       const click_id = e.target.id;
       const num_data = e.target.alt;
-
-      const data = await response()
-      console.log(data)
-      const data_converter = JSON.stringify(data);
-      const back = JSON.stringify(window.location.href);
-      let backIndex = "index.html#ventana"
-        contenedor.classList.toggle("hidden");
-        ventana.classList.toggle("h-full");
-
-      console.log();
-  
-     
       
-     
-      // const id = result.data.images[0].artist.artist_id;
+      
+      
+      
+      ventana.classList.remove("hidden");
+      if (e.target.closest("img")) {
+        const data = await response();
+        console.log(data);
+        const data_converter = JSON.stringify(data);
+        contenedor.classList.add("hidden");
+        
        
-      let validate_data;
-      let twitter;
-      let pixiv;
-      let enlace;
-      let source;
+        
+        let validate_data;
+        let twitter;
+        let pixiv;
+        let enlace;
+        let source;
 
-      if (data.data.images[num_data].artist === null) {
-        validate_data,twitter,pixiv = "No encontrado";
-      } else {
-        validate_data = data.data.images[num_data].artist.name;
-        twitter = undefined ? "No encontrado" : data.data.images[num_data].artist.twitter;
-        pixiv = undefined ? "No encontrado" :data.data.images[num_data].artist.pixiv;
-        enlace = undefined ? "No encontrado" : data.data.images[num_data].url;
-        source = data.data.images[num_data].artist.source;
-      }
-      const url = click_id;
-      let imagen = "";
-      let num = 0;
-      let imageurl = "";
+        if (data.data.images[num_data].artist === null) {
+          validate_data, twitter, pixiv = "No encontrado";
+        } else {
+          validate_data = data.data.images[num_data].artist.name;
+          twitter = undefined ? "No encontrado" : data.data.images[num_data].artist.twitter;
+          pixiv = undefined ? "No encontrado" : data.data.images[num_data].artist.pixiv;
+          enlace = undefined ? "No encontrado" : data.data.images[num_data].url;
+          source = data.data.images[num_data].artist.source;
+        }
+        const url = click_id;
+        let imagen = "";
+        let num = 0;
+        let imageurl = "";
 
-      const mostrar = ` 
+        const mostrar = ` 
 
-      <div class="flex space-y-5 max-w-5xl mt-12 justify-center flex-wrap bg-slate-600 rounded-xl  h-[200px] sm:h-[300px] mx-auto w-[400px]">
+      <div class="flex space-y-5 max-w-5xl mt-12 justify-center flex-wrap bg-slate-800 rounded-xl  h-[200px] sm:h-[300px] mx-auto w-[400px]">
       <div class="flex-col flex w-full">
         <div class="flex mx-auto">
           <span class="text-white text-sm sm:text-xl mb-7">INFORMACION</span>
@@ -125,14 +133,14 @@ const funcio = async () => {
 
 
     `;
-      data.data.images.forEach((element) => {
-        if (num <= 5) {
-          imageurl = element.url;
-          imagen =
-            imagen +
-            `
+        data.data.images.forEach((element) => {
+          if (num <= 5) {
+            imageurl = element.url;
+            imagen =
+              imagen +
+              `
             
-            <div class="w-[300px] h-full relative rounded-lg flex-col my-12 overflow-hidden group transition border-2 border-red-500 shadow-md mx-3">
+            <div class="w-[300px] h-full relative rounded-lg flex-col my-12 overflow-hidden group transition border-2 border-red-500 shadow-md mx-3 bg-red-500">
                <div class="relative bg-auto ">
                    <div class="w-full h-full bg-slate-800 group-hover:blur-[2px] ">
                        <img id="${element.url}" src="${element.url}" alt="${num}">
@@ -147,14 +155,24 @@ const funcio = async () => {
               
            </div>
            `;
-        }
-        num++;
-      });
-      console.log(mostrar);
-      document.getElementById("mostrar").innerHTML += mostrar;
-      document.getElementById("vermas").innerHTML += imagen;
+          }
+          num++;
+          
+        });
+        console.log(mostrar);
+        document.getElementById("mostrar").innerHTML = mostrar;
+        document.getElementById("vermas").innerHTML = imagen;
 
-    });
+      }
+});
+      
+      
+  
+     
+      
+     
+      // const id = result.data.images[0].artist.artist_id;
+       
   } catch (error) {
     console.log(error);
   }

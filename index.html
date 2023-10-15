@@ -17,22 +17,48 @@
       }
     </style>
   </head>
-  <body class="bg-slate-800 h-full">
-    <a href = "#ventana" 
+  <body class="">
+    <div
+      href="#ventana"
       id="contenedor"
-      class="w-full h-full flex flex-wrap justify-center max-w-5xl mx-auto z-10"
-    ></a>
-    <a class="w-full mx-auto justify-center max-w-5xl flex" id="ventana" href="#contenedor">
-      <a class="w-full h-full mx-auto flex flex-wrap justify-center items-center" id="mostrar" href="#contenedor">
-         
-      </a>
-      <div class="w-full h-full flex flex-wrap justify-center max-w-5xl mx-auto z-10" id="vermas">
-      
-        
-          
-        </div>
-    </a>
-    
+      class="w-full h-full flex flex-wrap justify-center max-w-5xl mx-auto z-10 bg-slate-800"
+    ></div>
+    <div
+      class="w-full mx-auto justify-center max-w-5xl flex-col bg-red-800  blur-2xl "
+      id="ventana"
+      href="#contenedor"
+    >
+     <button id="botoncerrar" class="text-white">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="icon icon-tabler icon-tabler-circle-x"
+            width="44"
+            height="44"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="#ffffff"
+            fill="none"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+            <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" />
+            <path d="M10 10l4 4m0 -4l-4 4" />
+          </svg>
+        </button>
+      <div
+        class="w-full h-full mx-auto flex flex-wrap justify-center bg-slate-800"
+        id="mostrar"
+        href="#contenedor"
+      >
+       
+      </div>
+      <div
+        class="w-full h-full flex flex-wrap justify-center max-w-5xl mx-auto z-10 bg-red-500"
+        id="vermas"
+      ></div>
+    </div>
+
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="./src/index.js" defer></script>
     <script src="./src/mostrar.js"></script>
